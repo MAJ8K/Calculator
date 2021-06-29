@@ -1,61 +1,81 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
-.container{
+body{
     width: 100vw;
     height: 100vh;
+    background: linear-gradient(to top right, black,darkgoldenrod);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#calculator{
+    padding: 20px;
+    border-radius: 3em;
     background-color: #222;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#grid {
-    background-color: #444;
-    width: 20em;
-    height: 20em;
+    justify-self: center;
+    align-self: center;
     display: grid;
-    gap: .1em;
-    grid-template-columns: repeat(4,1fr);
-    grid-template-areas: 
-        'text text text text'
-        'ac back equ equ'
-        'SEV EIG NIN add'
-        'FOU FIV SIX sub'
-        'ONE TWO THR mul'
-        'ZER point NEG div';
-}
-#text {
-    grid-area: text;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 1.3em;
+    align-content: center;
+    gap: .2em;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 
+    'SCR SCR SCR SCR'
+    'AC  BAC EQU EQU'
+    'SEV EIG NIN ADD'
+    'FOU FIV SIX SUB'
+    'ONE TWO THR MUL'
+    'PNT ZER NEG DIV';
 }
-textarea {
-    display: inline;
-    font-size: 3em;
-    background-color: rgba(255, 255, 255, 0);
-    max-width: 100%;
-    border: none;
-    padding-top: .2em;
+
+
+#screen {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    background-color: rgba(255, 223, 144, 0.678);
+    grid-area: SCR;
+    height: 4em;
+    border-radius: 20em;
+}
+#current{
+    grid-row: 1;
+    grid-column: 1;
+    align-self: center;
+    justify-self: end;
+    padding-right: .4em;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 2em;
+    width: 200px;
+}
+#previous{
+    grid-row: 1;
+    grid-column: 1;
+    position: static;
+    padding-left: 1.5em;
+    align-self: end;
+    justify-self: start;
 }
 .func {
-    background-color: darkorange;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5em;
+    background-color: darkgoldenrod;
 }
-.no {
-    background-color: #333;
+div {
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 1.5em;
+    align-items: center;
+    min-width: 4rem;
+    background-color: #555;
+    height: 4rem;
+    border-radius: 20em;
+    font-weight: bolder;
+    font-size: 1.7em;
 }
-.no:hover, .func:hover, .operator {
-    background-color: beige;
+div:hover, .op{
+    background-color: rgb(255, 233, 193);
 }
