@@ -36,47 +36,59 @@ class Calculator {
             case "⇐":
                 this.delete();
                 return;
-            case "=":
-                this.calc();
-                return;
         }
-        if(this.currentNum === '')return;
-        if(this.previousNum !== ''){
-            this.calc();
+        if(this.currentNum === ''){
+            if(id !== '=') this.operation = id;
+            return;
         }
-        this.operation = id;
-        this.previousNum = this.currentNum;
-        this.currentNum = '';
+        this.calc();
+        if(id !== '=') {
+            this.currentNum = '';
+            this.operation = id;
+        }
     }
     calc(){
-        let comp;
-        const prev = parseFloat(this.previousNum);
-        const curr = parseFloat(this.currentNum);
-        if (isNaN(prev) || isNaN(curr)) return;
+        let comp = 0.0;
+        var curr = parseFloat(this.currentNum);
+        var prev = parseFloat(this.previousNum);
         switch (this.operation) {
             case '+':
-                comp = prev + curr;
+                curr = prev + curr;
                 break;
             case '-':
-                comp = prev - curr;
+                curr = prev - curr;
                 break;
             case '∗':
-                comp = prev * curr;
+                curr = prev * curr;
                 break;
             case '÷':
-                comp = prev / curr;
-                break;
-        
-            default:
+                curr = prev / curr;
                 break;
         }
-        this.currentNum = comp;
+        this.previousNum = curr;
+    }
+    formatNum(num){
+        const strNum = num.toString();
+        const intDigits = parseFloat(strNum.split('.'));
+        const deciDigits = strNum.split('.')[1];
+        let intDisplay;
+        if(isNaN(intDigits)){
+            intDisplay = '';
+        } else {
+            intDisplay = intDigits.toLocaleString(
+                'en', {maximumFractionDigits: 0}
+            )
+        }
+        if (deciDigits != null){
+            return intDisplay + '.' + deciDigits;
+        }
+        return intDisplay;
     }
     update(){
         this.currentDisplay.innerText = 
-            this.currentNum;
+            this.formatNum(this.currentNum);
         this.previousDisplay.innerText = 
-            this.previousNum;
+            this.formatNum(this.previousNum);
     }
 }
 
